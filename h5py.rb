@@ -4,6 +4,13 @@ class H5py < Formula
   url "https://pypi.python.org/packages/source/h/h5py/h5py-2.6.0.tar.gz"
   sha256 "b2afc35430d5e4c3435c996e4f4ea2aba1ea5610e2d2f46c9cae9f785e33c435"
 
+  bottle do
+    cellar :any
+    sha256 "d4184ef4561a577609827c611adf9444d79616a4623749af14c87981b76a6002" => :el_capitan
+    sha256 "b9d1806fe9334807eab09cb8d5eb863ee7c8c138f23ce7a69683f5f4a8b0370d" => :yosemite
+    sha256 "ca5e701fb2764dfe2dcd050235ea5c3b80fd7efc26d8d1e4d0464a5a99e10291" => :mavericks
+  end
+
   option "without-python", "Build without python2 support"
   depends_on :python => :recommended if MacOS.version <= :snow_leopard
   depends_on :python3 => :optional
