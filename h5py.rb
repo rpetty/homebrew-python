@@ -7,9 +7,9 @@ class H5py < Formula
 
   bottle do
     cellar :any
-    sha256 "d4184ef4561a577609827c611adf9444d79616a4623749af14c87981b76a6002" => :el_capitan
-    sha256 "b9d1806fe9334807eab09cb8d5eb863ee7c8c138f23ce7a69683f5f4a8b0370d" => :yosemite
-    sha256 "ca5e701fb2764dfe2dcd050235ea5c3b80fd7efc26d8d1e4d0464a5a99e10291" => :mavericks
+    sha256 "f25c247a55cfeecc39cfda56550319f801e5c4e5f65dd1c54025bc7d0a8fc03d" => :el_capitan
+    sha256 "203b77e213415c6399fc4138960e27634ce3797c1fd4ee077a94d334a65af904" => :yosemite
+    sha256 "c211368c1a6e6e423acea875686d3c02701abbbc5a4cd657a14705bf034663dc" => :mavericks
   end
 
   option "without-python", "Build without python2 support"
