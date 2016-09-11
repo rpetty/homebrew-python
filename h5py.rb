@@ -3,6 +3,7 @@ class H5py < Formula
   homepage "http://www.h5py.org"
   url "https://pypi.python.org/packages/source/h/h5py/h5py-2.6.0.tar.gz"
   sha256 "b2afc35430d5e4c3435c996e4f4ea2aba1ea5610e2d2f46c9cae9f785e33c435"
+  revision 1
 
   bottle do
     cellar :any
