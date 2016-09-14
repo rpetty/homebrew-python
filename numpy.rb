@@ -12,6 +12,15 @@ class Numpy < Formula
     sha256 "5f4a1549cf8d89437dabce3bcc7f2f7e2ea7ab22a328824d0c9efe4427a52c31" => :yosemite
   end
 
+  head do
+    url "https://github.com/numpy/numpy.git"
+
+    resource "Cython" do
+      url "https://pypi.python.org/packages/c6/fe/97319581905de40f1be7015a0ea1bd336a756f6249914b148a17eefa75dc/Cython-0.24.1.tar.gz"
+      sha256 "84808fda00508757928e1feadcf41c9f78e9a9b7167b6649ab0933b76f75e7b9"
+    end
+  end
+
   option "without-python", "Build without python2 support"
 
   depends_on :python => :recommended if MacOS.version <= :snow_leopard
@@ -59,6 +68,13 @@ class Numpy < Formula
       resource("nose").stage do
         system python, *Language::Python.setup_install_args(libexec/"nose")
         (dest_path/"homebrew-numpy-nose.pth").write "#{nose_path}\n"
+      end
+
+      if build.head?
+        ENV.prepend_create_path "PYTHONPATH", buildpath/"tools/lib/python#{version}/site-packages"
+        resource("Cython").stage do
+          system python, *Language::Python.setup_install_args(buildpath/"tools")
+        end
       end
 
       system python, "setup.py",
