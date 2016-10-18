@@ -7,9 +7,9 @@ class Pymummer < Formula
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "8fbc3553a95f8d3244fcbdbcb7138721ea7abd29f33e745e655a24a8fe8bbd64" => :el_capitan
-    sha256 "aa25ecb3f16a8fbec38a74bb9eb1d229be8048840e6e8741fc6dcc6f77b88fb3" => :yosemite
-    sha256 "aa25ecb3f16a8fbec38a74bb9eb1d229be8048840e6e8741fc6dcc6f77b88fb3" => :mavericks
+    sha256 "f56b0078fbf1ce577128883d9c61d08261694c4da2f3eb3eca823f1146945bd1" => :sierra
+    sha256 "f56b0078fbf1ce577128883d9c61d08261694c4da2f3eb3eca823f1146945bd1" => :el_capitan
+    sha256 "f56b0078fbf1ce577128883d9c61d08261694c4da2f3eb3eca823f1146945bd1" => :yosemite
   end
 
   # tag "bioinformatics"
