@@ -1,7 +1,8 @@
 class Pillow < Formula
+  desc "Python Imaging Library fork"
   homepage "https://github.com/python-imaging/Pillow"
-  url "https://github.com/python-pillow/Pillow/archive/3.3.1.tar.gz"
-  sha256 "c76258246a157e99e745805098c25ae289bcdca4b56e5cf035daea091970e597"
+  url "https://github.com/python-pillow/Pillow/archive/3.4.2.tar.gz"
+  sha256 "0ee762ab924e004b7e69643b44e82cf65e0fa1f16862e11bd821950dbbc5f3d3"
   head "https://github.com/python-imaging/Pillow.git"
 
   bottle do
@@ -26,8 +27,8 @@ class Pillow < Formula
   depends_on "openjpeg" => :optional
 
   resource "nose" do
-    url "https://pypi.python.org/packages/source/n/nose/nose-1.3.3.tar.gz"
-    sha256 "b40c2ff268beb85356ada25f626ca0dabc89705f31051649772cf00fc9510326"
+    url "https://files.pythonhosted.org/packages/58/a5/0dc93c3ec33f4e281849523a5a913fa1eea9a3068acfa754d44d88107a44/nose-1.3.7.tar.gz"
+    sha256 "f1bffef9cbc82628f6e7d7b40d7e255aefaa1adb6a1b1d26c69a8b79e6208a98"
   end
 
   def install
