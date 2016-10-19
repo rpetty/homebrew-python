@@ -7,9 +7,9 @@ class Scapy < Formula
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "2ca5dbe42f8cee37f90918ff1405fba4ac5de0383c9e97d3aaa645d693985212" => :el_capitan
-    sha256 "289e7128c18924e591ed843c8bcb91cb2c6f15c45b0ec1858f84f15fc36ad27d" => :yosemite
-    sha256 "c7d010874cb8aea533d927b1a7874d4f2bf015dad112e8fa6163a2941d2cf7d9" => :mavericks
+    sha256 "873448d2a2b0bffc266193ba39eeb3ae57639f7ac8cef4b1829941eca4ea7821" => :sierra
+    sha256 "cdb6108de0ddddea60b87ac8f5a3a41533fa4bd7843398093c493b4e8699fb68" => :el_capitan
+    sha256 "d78cf3c59fb17fbb6140943a508a07de57371d8eaf35e0795dca7035c89e07e5" => :yosemite
   end
 
   depends_on :python
