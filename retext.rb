@@ -8,10 +8,9 @@ class Retext < Formula
   head "https://github.com/retext-project/retext.git"
 
   bottle do
-    cellar :any_skip_relocation
-    sha256 "e2083203128b7738258112f03c8300639263b3b01b2b453e346d70eab482d28b" => :el_capitan
-    sha256 "a18f8e98bdc3f71b6ea7100161a4ffa9bbc12c2df068db1599b1cbdae4c97b5c" => :yosemite
-    sha256 "e0d9dd6882fef5c7f325499d9f2e5917c1734ba154e661b916df02c73724a79d" => :mavericks
+    sha256 "fa25d5c39111e50f65ab9071c86bf6f36ed4d1b39f4883ed36833d2ad4d09227" => :sierra
+    sha256 "0e316206af9ce862b3c851d8af62804c8f829755b78dc091ebb7298641e01c35" => :el_capitan
+    sha256 "817c167107ef505c6209dc40bcc0f61ae68c763661ecbabcaaa2245bd300304f" => :yosemite
   end
 
   depends_on "enchant"
