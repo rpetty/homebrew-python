@@ -1,8 +1,11 @@
 class Retext < Formula
+  include Language::Python::Virtualenv
+
   desc "Powerful editor for Markdown and reStructuredText"
   homepage "https://github.com/retext-project/retext"
-  url "https://github.com/retext-project/retext/archive/5.2.1.tar.gz"
-  sha256 "a1ec52bedf65332d817623f8552204a00adb8b7ce54d59359f07a18f821909a1"
+  url "https://files.pythonhosted.org/packages/0e/2b/eb0aafef02337a26b3d497fa1f99f25f1f6039fcd063a4edfe3c174acc7a/ReText-6.0.2.tar.gz"
+  sha256 "ce28b20673627bd4e17c750d71b73e073776e291b2a1736dd561a1a24aa7f70b"
+  head "https://github.com/retext-project/retext.git"
 
   bottle do
     cellar :any_skip_relocation
@@ -11,59 +14,65 @@ class Retext < Formula
     sha256 "e0d9dd6882fef5c7f325499d9f2e5917c1734ba154e661b916df02c73724a79d" => :mavericks
   end
 
-  depends_on :python3
-  depends_on "pyqt" => "with-python3"
-  # workaround for Homebrew dependency issue, 7/7/14
-  depends_on "sip" => "with-python3"
   depends_on "enchant"
+  depends_on :python3
+  depends_on "pyqt5"
+  depends_on "sip" => "with-python3"
+
+  resource "docutils" do
+    url "https://files.pythonhosted.org/packages/37/38/ceda70135b9144d84884ae2fc5886c6baac4edea39550f28bcd144c1234d/docutils-0.12.tar.gz"
+    sha256 "c7db717810ab6965f66c8cf0398a98c9d8df982da39b4cd7f162911eb89596fa"
+  end
+
+  resource "Markdown" do
+    url "https://files.pythonhosted.org/packages/d4/32/642bd580c577af37b00a1eb59b0eaa996f2d11dfe394f3dd0c7a8a2de81a/Markdown-2.6.7.tar.gz"
+    sha256 "daebf24846efa7ff269cfde8c41a48bb2303920c7b2c7c5e04fa82e6282d05c0"
+  end
+
+  resource "Markups" do
+    url "https://files.pythonhosted.org/packages/0b/98/3a20a868437c17db37cec47cc82fbd1030aa55765faf06207ab832e85152/Markups-2.0.0.tar.gz"
+    sha256 "5639ddd76d74e0a5335e5b66ff2f1b3f9a9f0ab6eeff76a1003f59ed0ec2b721"
+  end
+
+  resource "pyenchant" do
+    url "https://files.pythonhosted.org/packages/73/73/49f95fe636ab3deed0ef1e3b9087902413bcdf74ec00298c3059e660cfbb/pyenchant-1.6.8.tar.gz"
+    sha256 "7ead2ee74f1a4fc2a7199b3d6012eaaaceea03fbcadcb5df67d2f9d0d51f050a"
+  end
+
+  resource "Pygments" do
+    url "https://files.pythonhosted.org/packages/b8/67/ab177979be1c81bc99c8d0592ef22d547e70bb4c6815c383286ed5dec504/Pygments-2.1.3.tar.gz"
+    sha256 "88e4c8a91b2af5962bfa5ea2447ec6dd357018e86e94c7d14bd8cacbc5b55d81"
+  end
 
   resource "icons" do
     url "https://downloads.sourceforge.net/project/retext/Icons/ReTextIcons_r4.tar.gz"
     sha256 "c0a8c9791d320ef685a9087f230418f3308e6ccbefbf768b827490cde4084fd9"
   end
 
-  resource "markups" do
-    url "https://pypi.python.org/packages/source/M/Markups/Markups-0.6.3.tar.gz"
-    sha256 "e3ff5de2be018240c526e017972b37181cb3d5dfb7c96ad14eae6639140f58ef"
-  end
-
-  resource "markdown" do
-    url "https://pypi.python.org/packages/source/M/Markdown/Markdown-2.6.3.tar.gz"
-    sha256 "ad75fc03c45492eba3bc63645e1e6465f65523a05fff0abf36910f810465a9af"
-  end
-
-  resource "docutils" do
-    url "https://pypi.python.org/packages/source/d/docutils/docutils-0.12.tar.gz"
-    sha256 "c7db717810ab6965f66c8cf0398a98c9d8df982da39b4cd7f162911eb89596fa"
-  end
-
-  resource "pyenchant" do
-    url "https://pypi.python.org/packages/source/p/pyenchant/pyenchant-1.6.6.tar.gz"
-    sha256 "25c9d2667d512f8fc4410465fdd2e868377ca07eb3d56e2b6e534a86281d64d3"
-  end
-
   def install
-    version = Language::Python.major_minor_version "python3"
-    ENV["PYTHONPATH"] = lib/"python#{version}/site-packages"
-    ENV.prepend_create_path "PYTHONPATH", libexec/"lib/python#{version}/site-packages"
+    py_version = Language::Python.major_minor_version "python3"
+    ENV["PYTHONPATH"] = libexec/"lib/python#{py_version}/site-packages"
 
-    res = %w[markups markdown docutils pyenchant]
-    res.each do |r|
-      resource(r).stage do
-        system "python3", "setup.py", "install", "--prefix=#{libexec}"
-      end
-    end
+    venv = virtualenv_create(libexec, "python3")
+    res = %w[Markups Markdown docutils pyenchant]
+    venv.pip_install res
+    venv.pip_install_and_link buildpath
 
-    system "python3", "setup.py", "install", "--prefix=#{prefix}"
-    bin.env_script_all_files(prefix, :PYTHONPATH => ENV["PYTHONPATH"])
-    bin.install_symlink "retext" => "retext.py"
-
-    retext_dir = lib/"python#{version}/site-packages/ReText/"
+    retext_dir = libexec/"lib/python#{py_version}/site-packages/ReText/"
     icons_dir = retext_dir/"icons"
-    resource("icons").stage { icons_dir.install Dir["*"] }
-    inreplace retext_dir/"__init__.py", 'icon_path = "icons/"',
+    icons_dir.install resource("icons")
+    inreplace retext_dir/"__init__.py", "icon_path = 'icons/'",
                                         "icon_path = '#{icons_dir}/'"
+  end
 
-    inreplace retext_dir/"window.py", "menubar = QMenuBar(self)", "menubar = QMenuBar()"
+  test do
+    py_version = Language::Python.major_minor_version "python3"
+    ENV["PYTHONPATH"] = libexec/"lib/python#{py_version}/site-packages"
+    cmd = "python3 -c 'from ReText import app_version; print(app_version)'"
+    if stable?
+      assert_equal stable.version.to_s, shell_output(cmd).chomp
+    elsif head?
+      assert_match "(Git)", shell_output(cmd)
+    end
   end
 end
