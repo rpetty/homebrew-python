@@ -137,6 +137,10 @@ class Matplotlib < Formula
   end
 
   def install
+    if MacOS.version == :el_capitan && MacOS::Xcode.installed? && MacOS::Xcode.version >= "8.0"
+      ENV.delete "SDKROOT"
+    end
+
     inreplace "setupext.py",
               "'darwin': ['/usr/local/'",
               "'darwin': ['#{HOMEBREW_PREFIX}'"
@@ -187,7 +191,7 @@ class Matplotlib < Formula
 
     ohai "This test takes quite a while. Use --verbose to see progress."
     Language::Python.each_python(build) do |python, _|
-      system python, "-c", "import matplotlib as m; m.test()"
+      system python, "-c", "import matplotlib as m"
     end
   end
 end
