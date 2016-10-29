@@ -5,9 +5,10 @@ class Pyrit < Formula
   sha256 "c610b7e5930e71ef466365418e58ce72f4b7dea5a3398c3296192f0c4a7175aa"
 
   bottle do
-    sha256 "988ba5e46df34c95ebf72294a146338ade7e3972d82ca76f1182f720717bf417" => :yosemite
-    sha256 "f56281afb83a401d5af004a5e19dedf5ada98ebfcb08898015f4a941284555e5" => :mavericks
-    sha256 "ca269489116ea7b57727d243200b696b0f72780c0836b27fa79b6de0f7e14cd3" => :mountain_lion
+    cellar :any
+    sha256 "164cafe644cb692ee40c60fa0c753c272dde808a674ecafcf05869a9058e33d5" => :sierra
+    sha256 "a7cd2a02fb03bac2d3efde35d2bfdb115158628580e6071414699e8d1506a7eb" => :el_capitan
+    sha256 "d896c366eae3e95988385fc8c75f241ba8049666a0a2576a9578ed5a7d609274" => :yosemite
   end
 
   depends_on "libdnet"
