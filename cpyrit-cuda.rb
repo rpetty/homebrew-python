@@ -31,9 +31,9 @@ class CudaRequirement < Requirement
 end
 
 class CpyritCuda < Formula
-  homepage "https://code.google.com/p/pyrit/"
-  url "https://pyrit.googlecode.com/files/cpyrit-cuda-0.4.0.tar.gz"
-  sha256 "6035f01874f699f010e460618694ec876f719bea475313b991f5dd3dd84d831b"
+  homepage "https://github.com/JPaulMora/Pyrit"
+  url "https://github.com/JPaulMora/Pyrit/archive/v0.5.0.tar.gz"
+  sha256 "c610b7e5930e71ef466365418e58ce72f4b7dea5a3398c3296192f0c4a7175aa"
 
   depends_on :python
   depends_on "pyrit"
