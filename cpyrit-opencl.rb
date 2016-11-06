@@ -5,7 +5,7 @@ class CpyritOpencl < Formula
   sha256 "c610b7e5930e71ef466365418e58ce72f4b7dea5a3398c3296192f0c4a7175aa"
 
   bottle do
-    cellar : any
+    cellar :any
     sha256 "164cafe644cb692ee40c60fa0c753c272dde808a674ecafcf05869a9058e33d5" => :sierra
     sha256 "a18be7044c7228e3b8dd43bfbd1bd80f6ee64fbbf5e1a85d1f777075409eb15a" => :yosemite
     sha256 "e77974aa1fc02c0dc3396935ec4706e22f355fd238af6c190779327851132886" => :mavericks
