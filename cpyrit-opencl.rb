@@ -25,3 +25,4 @@ class CpyritOpencl < Formula
     system "python", "-c", "import cpyrit._cpyrit_opencl"
   end
 end
+
